@@ -15,5 +15,6 @@ module('Integration | Component | rental', function(hooks) {
     assert.dom('article .detail.type').containsText('Standalone');
     assert.dom('article .detail.location').containsText('San Francisco');
     assert.dom('article .detail.bedrooms').containsText('15');
+    assert.dom('article .image').exists();
   });
 });
