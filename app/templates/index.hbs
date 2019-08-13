@@ -6,8 +6,8 @@
 
 <div class="rentals">
   <ul class="results">
-    <li><Rental @rental={{this.model}} /></li>
-    <li><Rental @rental={{this.model}} /></li>
-    <li><Rental @rental={{this.model}} /></li>
+    {{#each this.model as |rental|}}
+      <li><Rental @rental={{rental}} /></li>
+    {{/each}}
   </ul>
 </div>
