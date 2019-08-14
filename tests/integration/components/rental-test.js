@@ -6,9 +6,14 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Component | rental', function(hooks) {
   setupRenderingTest(hooks);
 
+  hooks.beforeEach(function() {
+    this.owner.setupRouter();
+  });
+
   test('it renders information about a rental property', async function(assert) {
     this.setProperties({
       rental: {
+        id: 'grand-old-mansion',
         title: 'Grand Old Mansion',
         owner: 'Veruca Salt',
         city: 'San Francisco',
@@ -28,6 +33,7 @@ module('Integration | Component | rental', function(hooks) {
 
     assert.dom('article').hasClass('rental');
     assert.dom('article h3').containsText('Grand Old Mansion');
+    assert.dom('article h3 a').hasAttribute('href', '/rentals/grand-old-mansion');
     assert.dom('article .detail.owner').containsText('Veruca Salt');
     assert.dom('article .detail.type').containsText('Standalone');
     assert.dom('article .detail.location').containsText('San Francisco');
