@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { click, visit, currentURL } from '@ember/test-helpers';
+import { click, fillIn, visit, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 
 module('Acceptance | super rentals', function(hooks) {
@@ -63,6 +63,20 @@ module('Acceptance | super rentals', function(hooks) {
     assert.dom('.rental').exists({ count: 3 });
 
     await click('.rental:first-of-type a');
+
+    assert.equal(currentURL(), '/rentals/grand-old-mansion');
+  });
+
+  test('searching for a rental property', async function(assert) {
+    await visit('/');
+
+    assert.dom('.rental').exists({ count: 3 });
+
+    await fillIn('.rentals input', 'Grand');
+
+    assert.dom('.rental').exists({ count: 1 });
+
+    await click('.rental a');
 
     assert.equal(currentURL(), '/rentals/grand-old-mansion');
   });
